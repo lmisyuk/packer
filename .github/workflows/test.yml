@@ -15,4 +15,4 @@ jobs:
 
       - name: Verify installation
         run: |
-          packer
+          packer --version
