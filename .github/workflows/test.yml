@@ -2,7 +2,9 @@ name: Test HashiCorp Packer
 
 on:
   push:
-  
+permissions:
+  id-token: write
+  contents: read 
 jobs:
   build:
     runs-on: ubuntu-latest
