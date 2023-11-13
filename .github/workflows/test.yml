@@ -14,5 +14,22 @@ jobs:
         uses: hashicorp/setup-packer@v2.0.0
 
       - name: Verify installation
+        run: packer --version
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
+          role-session-name: github_session
+          aws-region: il-central-1
+
+      - name: Initialize Packer configuration
+        run: packer init tutorial
+
+      - name: Format and validate Packer template
         run: |
-          packer --version
+          packer fmt tutorial
+          pakcer validate tutorial
+
+      - name: Build Packer image
+        run: packer build tutorial/aws-ubuntu.pkr.hcl
