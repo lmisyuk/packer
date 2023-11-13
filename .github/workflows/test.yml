@@ -31,7 +31,7 @@ jobs:
       - name: Format and validate Packer template
         run: |
           packer fmt tutorial
-          pakcer validate tutorial
+          packer validate tutorial
 
       - name: Build Packer image
         run: packer build tutorial/aws-ubuntu.pkr.hcl
