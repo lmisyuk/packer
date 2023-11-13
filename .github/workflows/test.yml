@@ -12,6 +12,7 @@ jobs:
 
       - name: Setup packer
         uses: hashicorp/setup-packer@v2.0.0
-        id: setup
-    outputs:
-      version: ${{ steps.setup.outputs.version }}
+
+      - name: Verify installation
+        run: |
+          packer
