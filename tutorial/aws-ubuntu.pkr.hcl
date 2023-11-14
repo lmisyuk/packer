@@ -32,10 +32,6 @@ source "amazon-ebs" "ubuntu" {
       "tag:NetworkType" = "Public"
     }
   }
-  assume_role {
-    role_arn = "arn:aws:iam::464929637586:role/github"
-    session_name = "packer_session"
-  }
 }
 
 build {
