@@ -21,6 +21,21 @@ source "amazon-ebs" "ubuntu" {
     owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
+  vpc_filter {
+    filters = {
+      "tag:Name"  = "misyuk-vpc",
+      isdefault   = false
+    }
+  }
+  subnet_filter {
+    filters = {
+      "tag:NetworkType" = "Public"
+    }
+  }
+  assume_role {
+    role_arn = "{{ env `aws_github_role_arn` }}"
+    session_name = "packer_session"
+  }
 }
 
 build {
