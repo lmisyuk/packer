@@ -28,9 +28,7 @@ source "amazon-ebs" "ubuntu" {
     }
   }
   subnet_filter {
-    filters = {
-      "tag:NetworkType" = "Public"
-    }
+    subnet_id = "subnet-01db8a883e9f266cd"
   }
 }
 
