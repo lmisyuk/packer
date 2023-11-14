@@ -36,4 +36,4 @@ jobs:
       - name: Build Packer image
         env:
           aws_github_role_arn: ${{ vars.AWS_GITHUB_ROLE_ARN }}
-        run: packer build tutorial/aws-ubuntu.pkr.hcl
+        run: packer build tutorial/aws-ubuntu.pkr.hcl -debug
