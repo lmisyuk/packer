@@ -28,7 +28,7 @@ source "amazon-ebs" "ubuntu" {
     }
   }
   subnet_filter {
-    subnet_id = "subnet-01db8a883e9f266cd"
+    "tag:Name" = "misyuk-subnet-public1-il-central-1a"
   }
 }
 
