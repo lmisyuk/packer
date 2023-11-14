@@ -28,7 +28,9 @@ source "amazon-ebs" "ubuntu" {
     }
   }
   subnet_filter {
-    "tag:Name" = "misyuk-subnet-public1-il-central-1a"
+    filters = {
+      "tag:Name" = "misyuk-subnet-public1-il-central-1a"
+    }
   }
 }
 
