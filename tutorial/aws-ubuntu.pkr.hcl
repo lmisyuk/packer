@@ -8,12 +8,12 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "test-packer"
+  ami_name      = "lev-amzn2"
   instance_type = "t3.micro"
   region        = "il-central-1"
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-jammy-22.04-amd64-server-*"
+      name                = "amzn2-ami-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
