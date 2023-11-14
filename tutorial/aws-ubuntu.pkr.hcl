@@ -24,7 +24,7 @@ source "amazon-ebs" "ubuntu" {
   vpc_filter {
     filters = {
       "tag:Name"  = "misyuk-vpc",
-      isdefault   = false
+      isDefault   = false
     }
   }
   subnet_filter {
@@ -33,7 +33,7 @@ source "amazon-ebs" "ubuntu" {
     }
   }
   assume_role {
-    role_arn = "{{ env `aws_github_role_arn` }}"
+    role_arn = "arn:aws:iam::464929637586:role/github"
     session_name = "packer_session"
   }
 }
