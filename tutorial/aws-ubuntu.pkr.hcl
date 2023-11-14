@@ -27,9 +27,9 @@ source "amazon-ebs" "ubuntu" {
       isDefault   = false
     }
   }
-  subnet_filter {
-    subnet_id = "subnet-01db8a883e9f266cd"
-  }
+  // subnet_filter {
+  //   subnet_id = "subnet-01db8a883e9f266cd"
+  // }
 }
 
 build {
