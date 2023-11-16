@@ -20,7 +20,7 @@ source "amazon-ebs" "ubuntu" {
     most_recent = true
     owners      = ["amazon"]
   }
-  ssh_username = "ubuntu"
+  ssh_username = "ec2-user"
   ssh_interface = "public_ip"
   associate_public_ip_address = true
   vpc_filter {
