@@ -18,7 +18,7 @@ source "amazon-ebs" "ubuntu" {
       virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["self"]
+    owners      = ["amazon"]
   }
   ssh_username = "ubuntu"
   ssh_interface = "public_ip"
