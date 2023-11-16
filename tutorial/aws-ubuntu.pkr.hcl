@@ -13,10 +13,12 @@ source "amazon-ebs" "ubuntu" {
   region        = "il-central-1"
   source_ami_filter {
     filters = {
-      name                = "amzn2-ami-hvm-2.0.20231101.0-x86_64-ebs"
+      name = "amzn2*"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["099720109477"]
+    owners      = ["self"]
   }
   ssh_username = "ubuntu"
   ssh_interface = "public_ip"
