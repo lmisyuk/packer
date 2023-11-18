@@ -1,8 +1,8 @@
 name: Create Amazon AMI
 on:
   push:
-    branches:
-      - "!master"
+    branches-ignore:
+      - master
   workflow_dispatch:
     branches:
       - master
