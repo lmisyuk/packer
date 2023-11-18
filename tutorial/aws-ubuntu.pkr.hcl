@@ -7,8 +7,12 @@ packer {
     }
 }
 
+locals {
+  current_date = formatdate("DDMMYYYY", timestamp())
+}
+
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "lev-amzn2"
+  ami_name      = "lev-amzn2-${local.current_date}"
   instance_type = "t3.micro"
   region        = "il-central-1"
   source_ami_filter {
