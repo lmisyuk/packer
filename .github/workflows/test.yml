@@ -21,6 +21,7 @@ jobs:
           role-session-name: github_session
           aws-region: il-central-1
   validate:
+    needs: prepare
     runs-on: ubuntu-latest
     steps:
       - name: Initialize Packer configuration
@@ -33,6 +34,9 @@ jobs:
         run: packer validate tutorial
   build:
     if: github.ref_name == 'master'
+    needs:
+      - prepare
+      - validate
     runs-on: ubuntu-latest
     steps:
       - name: Build Packer image
