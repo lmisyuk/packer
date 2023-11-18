@@ -12,6 +12,16 @@ locals {
   current_time   = formatdate("hhmmss", timestamp())
 }
 
+data "amazon-ami" "al2" {
+    filters = {
+        virtualization-type = "hvm"
+        name = "amzn2*"
+        root-device-type = "ebs"
+    }
+    owners = ["amazon"]
+    most_recent = true
+}
+
 source "amazon-ebs" "devops" {
   // ami parameters
   // ami_name                    = "lev-amzn2-${local.current_date}-${local.current_time}"
