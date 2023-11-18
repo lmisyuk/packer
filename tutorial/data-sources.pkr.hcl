@@ -1,4 +1,4 @@
-data "amazon-linux-2-ami" "basic" {
+data "amazon-ami" "al2" {
     filters = {
         virtualization-type = "hvm"
         name = "amzn2*"
