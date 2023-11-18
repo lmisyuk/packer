@@ -55,7 +55,7 @@ build {
   ]
   provisioner "shell" {
     inline = [
-      "sudo yum update -y",
+      // "sudo yum update -y",
       "sudo yum install -y snapd",
       "sudo snap install microk8s --classic --channel=1.28",
       "microk8s version"
