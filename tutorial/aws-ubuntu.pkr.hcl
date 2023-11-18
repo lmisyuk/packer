@@ -9,28 +9,26 @@ packer {
 
 locals {
   current_date = formatdate("DDMMYYYY", timestamp())
+  current_time   = formatdate("HHmmSS", timestamp())
 }
 
-source "amazon-ebs" "ubuntu" {
-  ami_name      = "lev-amzn2-${local.current_date}"
-  instance_type = "t3.micro"
-  region        = "il-central-1"
-  source_ami_filter {
-    filters = {
-      name = "amzn2*"
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
-    }
-    most_recent = true
-    owners      = ["amazon"]
-  }
-  ssh_username = "ec2-user"
-  ssh_interface = "public_ip"
+source "amazon-ebs" "devops" {
+  // ami parameters
+  // ami_name                    = "lev-amzn2-${local.current_date}-${local.current_time}"
+  ami_name                    = "lev-amzn2-{{timestamp}}"
+  source_ami                  = "data.amazon-linux-2-ami.basic"
+  instance_type               = "t3.micro"
+  region                      = "il-central-1"
+  skip_create_ami             = true
+
+  // connection parameters
+  ssh_username                = "ec2-user"
+  ssh_interface               = "public_ip"
   associate_public_ip_address = true
   vpc_filter {
     filters = {
-      "tag:Name"  = "misyuk-vpc",
-      isDefault   = false
+      "tag:Name" = "misyuk-vpc",
+      isDefault  = false
     }
   }
   subnet_filter {
@@ -41,8 +39,19 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  name    = "learn-packer"
+  name    = "trackeriq"
   sources = [
-    "source.amazon-ebs.ubuntu"
+    "source.amazon-ebs.devops"
   ]
+  provisioner "shell" {
+    inline = [
+      "sudo yum update -y",
+      "sudo yum install -y snapd",
+      "sudo snap install microk8s --classic --channel=1.28",
+      "microk8s version"
+    ]
+  }
+  post-processor "manifest" {
+    output = "amazon-linux-2-ami.json"
+  }
 }

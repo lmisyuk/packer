@@ -28,7 +28,6 @@ jobs:
       - name: Validate Packer template
         run: packer validate -evaluate-datasources tutorial
   build:
-    if: github.ref_name == 'master'
     needs: validate
     runs-on: ubuntu-latest
     steps:
