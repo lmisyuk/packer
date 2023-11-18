@@ -10,24 +10,14 @@ permissions:
   id-token: write
   contents: read 
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup packer
-        uses: hashicorp/setup-packer@v2.0.0
-      
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
-          role-session-name: github_session
-          aws-region: il-central-1
   validate:
-    needs: prepare
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Setup packer
+        uses: hashicorp/setup-packer@v2.0.0
         
       - name: Initialize Packer configuration
         run: packer init tutorial
@@ -36,16 +26,21 @@ jobs:
         run: packer fmt tutorial
 
       - name: Validate Packer template
-        run: packer validate tutorial
+        run: packer validate -evaluate-datasources tutorial
   build:
     if: github.ref_name == 'master'
-    needs:
-      - prepare
-      - validate
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
+          role-session-name: github_session
+          aws-region: il-central-1
       
       - name: Initialize Packer configuration
         run: packer init tutorial
