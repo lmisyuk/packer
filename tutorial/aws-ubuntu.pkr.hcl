@@ -9,7 +9,7 @@ packer {
 
 locals {
   current_date = formatdate("DDMMYYYY", timestamp())
-  current_time   = formatdate("HHmmSS", timestamp())
+  current_time   = formatdate("hhmmss", timestamp())
 }
 
 source "amazon-ebs" "devops" {
