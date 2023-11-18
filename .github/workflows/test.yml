@@ -1,6 +1,11 @@
 name: Create Amazon AMI
 on:
   push:
+    branches:
+      - "!master"
+  workflow_dispatch:
+    branches:
+      - master
 permissions:
   id-token: write
   contents: read 
@@ -41,6 +46,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        
+
       - name: Build Packer image
         run: PACKER_LOG=1 packer build tutorial/aws-ubuntu.pkr.hcl
