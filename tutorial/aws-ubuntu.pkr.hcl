@@ -16,7 +16,7 @@ source "amazon-ebs" "devops" {
   // ami parameters
   // ami_name                    = "lev-amzn2-${local.current_date}-${local.current_time}"
   ami_name                    = "lev-amzn2-{{timestamp}}"
-  source_ami                  = "data.amazon-linux-2-ami.basic"
+  source_ami                  = data.amazon-linux-2-ami.basic
   instance_type               = "t3.micro"
   region                      = "il-central-1"
   skip_create_ami             = true
