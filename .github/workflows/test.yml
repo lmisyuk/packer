@@ -8,9 +8,6 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
       - name: Setup packer
         uses: hashicorp/setup-packer@v2.0.0
       
@@ -24,6 +21,9 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Initialize Packer configuration
         run: packer init tutorial
 
@@ -39,5 +39,8 @@ jobs:
       - validate
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Build Packer image
         run: PACKER_LOG=1 packer build tutorial/aws-ubuntu.pkr.hcl
