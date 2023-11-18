@@ -1,12 +1,11 @@
-name: Test HashiCorp Packer
-
+name: Create Amazon AMI
 on:
   push:
 permissions:
   id-token: write
   contents: read 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -21,14 +20,20 @@ jobs:
           role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
           role-session-name: github_session
           aws-region: il-central-1
-
+  validate:
+    runs-on: ubuntu-latest
+    steps:
       - name: Initialize Packer configuration
         run: packer init tutorial
 
-      - name: Format and validate Packer template
-        run: |
-          packer fmt tutorial
-          packer validate tutorial
+      - name: Format Packer template
+        run: packer fmt tutorial
 
+      - name: Validate Packer template
+        run: packer validate tutorial
+  build:
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
       - name: Build Packer image
         run: PACKER_LOG=1 packer build tutorial/aws-ubuntu.pkr.hcl
