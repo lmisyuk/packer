@@ -27,13 +27,13 @@ jobs:
           aws-region: il-central-1
         
       - name: Initialize Packer configuration
-        run: packer init tutorial
+        run: packer init .
 
       - name: Format Packer template
-        run: packer fmt tutorial
+        run: packer fmt .
 
       - name: Validate Packer template
-        run: packer validate -evaluate-datasources tutorial
+        run: packer validate -evaluate-datasources .
 
       - name: Build Packer image
-        run: PACKER_LOG=1 packer build tutorial/aws-ubuntu.pkr.hcl
+        run: PACKER_LOG=1 packer build .
