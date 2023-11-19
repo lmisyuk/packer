@@ -5,9 +5,13 @@ build {
   ]
   provisioner "shell" {
     inline = [
-      // "sudo yum update -y",
-      "sudo yum install -y snapd",
-      "sudo snap install microk8s --classic --channel=1.28",
+      "amazon-linux-extras install epel -y",
+      "yum update -y",
+      "yum -y install snapd",
+      "systemctl enable --now snapd.socket",
+      "ln -s /var/lib/snapd/snap /snap",
+      "systemctl restart snapd.seeded.service",
+      "snap install microk8s --classic --channel=1.28/stable",
       "microk8s version"
     ]
   }
