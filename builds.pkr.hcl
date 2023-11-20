@@ -7,6 +7,7 @@ build {
     inline = [
       "sudo amazon-linux-extras install epel -y",
       "sudo yum update -y",
+      "sudo yum -y install wget",
       "wget http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-3.13.1-268.el7_9.2.noarch.rpm",
       "wget http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-base-3.13.1-268.el7_9.2.noarch.rpm",
       "sudo yum -y install *",
