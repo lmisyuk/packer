@@ -16,7 +16,7 @@ build {
       "sudo ln -s /var/lib/snapd/snap /snap",
       "sudo systemctl restart snapd.seeded.service",
       "sudo snap install microk8s --classic --channel=1.28/stable",
-      "microk8s version"
+      "$(which microk8s) version"
     ]
   }
   post-processor "manifest" {
