@@ -6,7 +6,6 @@ build {
   provisioner "shell" {
     inline = [
       "sudo amazon-linux-extras install epel -y",
-      "sudo systemctl disable --now packagekit",
       "sudo yum update -y",
       "sudo yum -y install wget",
       "wget -q --show-progress http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-3.13.1-268.el7_9.2.noarch.rpm",
