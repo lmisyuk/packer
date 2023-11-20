@@ -9,7 +9,7 @@ build {
       "sudo yum update -y",
       "sudo yum -y install wget",
       "wget http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-3.13.1-268.el7_9.2.noarch.rpm",
-      "wget http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-base-3.13.1-268.el7_9.2.noarch.rpm",
+      "wget http://mirror.centos.org/centos/7/updates/x86_64/Packages/selinux-policy-targeted-3.13.1-268.el7_9.2.noarch.rpm",
       "sudo yum -y install *",
       "sudo yum -y install snapd",
       "sudo systemctl enable --now snapd.socket",
