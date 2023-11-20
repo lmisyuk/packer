@@ -9,7 +9,8 @@ build {
     ]
     execute_command = "echo trackeriq | {{ .Vars }} sudo -EHS bash '{{ .Path }}'"
     scripts = [
-      "${path.root}/scripts/init.sh"
+      "${path.root}/scripts/init.sh",
+      "${path.root}/scripts/microk8s.sh"
     ]
   }
   post-processor "manifest" {
