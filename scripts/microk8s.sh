@@ -52,8 +52,8 @@ output=$(sed -n "${line}p" /etc/sudoers)
 echo "${output}:/var/lib/snapd/snap/bin/" > ~/sudoers
 mv ~/sudoers /etc/sudoers.d/.
 
-echo "Checking microk8s status"
-microk8s status --wait-ready
+# echo "Checking microk8s status"
+# microk8s status --wait-ready
 
 echo "Enabling Add-ons"
 microk8s enable dns host-access ingress storage dashboard prometheus
